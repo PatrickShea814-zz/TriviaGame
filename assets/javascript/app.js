@@ -1,98 +1,207 @@
 
-var pages = [
-    {
-        questionOne: [{
-            ques: "What ship does the first mission take place on?",
-            choices: ["Dawn Under Heaven", "Forward Unto Dawn", "The Pillar of Autumn", "Spirit of Fire"],
-            correctAnswer: "The Pillar of Autumn"}]
-    }, {
-        questionTwo: [{
-            ques: "What is 343 Guilty Spark?",
-            choices: ["2401 Penitent Tangent", "343 Guilty Spark", "Mendicant Bias", "867 Guilty Tangent"],
-            correctAnswer: "1"}]
-    }, {
-        questionThree: [{
-            ques: "Name the Captain of The Pillar of Autumn",
-            choices: ["Miranda Keyes", "Jacob Keyes", "Michael Keyes", "Avery Johnson"],
-            correctAnswer: "1"}]
-    }, {
-        questionFour: [{
-            ques: "Who built Halo?",
-            choices: ["Forerunner", "Humans", "Prometheans", "Precursors"],
-            correctAnswer: "1"}]
-    }, {
-        questionFive: [{
-            ques: "Who is the leader of the Brutes?",
-            choices: ["Half-Jaw", "Arbiter", "Atriox", "Tartarus"],
-            correctAnswer: "1"}]
-    }, {
-        questionSix: [{
-            ques: "What was Foe Hammer's call-sign?",
-            choices: ["John 177", "Charlie 258", "Echo 419", "Whisky 327"],
-            correctAnswer: "Echo 419"}]
-    }, {
-        questionSeven: [{
-            ques: "I would have been you _______.",
-            choices: ["Doom", "Enemy", "Savior", "Daddy"],
-            correctAnswer: "Daddy"}]
-    }, {
-        questionEight: [{
-            ques: "What do the Covenant seek?",
-            choices: ["The Great Journey", "Halo", "The Fringe", "The Ark"],
-            correctAnswer: "The Great Journey"}]
-    }, {
-        questionNine: [{
-            ques: "Who created Cortana?",
-            choices: ["Dr. Halsey", "Dr. Keyes", "Dr. Palmer", "The Didact"],
-            correctAnswer: "Dr. Halsey"}]
-    }, {
-        questionTen: [{
-            ques: "What is The Silent Cartographer?",
-            choices: ["Map Security", "An Island", "A Map Room", "The Control Room"],
-            correctAnswer: "1"}]
+
+$(document).mouseover(function () {
+    document.getElementById("my_audio").play();
+});
+$(document).ready(function () {
+
+    var options = [
+        {
+            question: "What ship does the first mission take place on?",
+            choice: ["Dawn Under Heaven", "Forward Unto Dawn", "The Pillar of Autumn", "Spirit of Fire"],
+            answer: 1,
+            photo: "assets/images/pillar.jpg"
+        },
+        {
+            question: "What is 343 Guilty Spark?",
+            choice: ["2401 Penitent Tangent", "343 Guilty Spark", "Mendicant Bias", "867 Guilty Tangent"],
+            answer: 1,
+            photo: "assets/images/monitor.png"
+        },
+        {
+            question: "Name the Captain of The Pillar of Autumn",
+            choice: ["Miranda Keyes", "Jacob Keyes", "Michael Keyes", "Avery Johnson"],
+            answer: 1,
+            photo: "assets/images/Keyes_Jacob_Pacchetto.jpg"
+        },
+        {
+            question: "Who built Halo?",
+            choice: ["The Forerunner", "Humans", "Prometheans", "Precursors"],
+            answer: 0,
+            photo: "assets/images/forerunner.jpg"
+        },
+        {
+            question: "Who is the leader of the Brutes?",
+            choice: ["Half-Jaw", "Arbiter", "Atriox", "Tartarus"],
+            answer: 3,
+            photo: "assets/images/tartarus.jpg"
+        },
+        {
+            question: "What was Foehammer's call-sign?",
+            choice: ["John 177", "Charlie 258", "Echo 419", "Whisky 327"],
+            answer: 2,
+            photo: "assets/images/Echo_419_and_Bravo_022.jpg"
+        },
+        {
+            question: "I would have been your _______.",
+            choice: ["Doom", "Enemy", "Savior", "Daddy"],
+            answer: 3,
+            photo: "assets/images/daddy.jpeg"
+        },
+        {
+            question: "What do the Covenant seek?",
+            choice: ["The Great Journey", "Halo", "The Fringe", "The Ark"],
+            answer: 0,
+            photo: "assets/images/pillar.jpg"
+        }];
+
+    var correctCount = 0;
+    var wrongCount = 0;
+    var killdeathRatio = correctCount / wrongCount;
+    var unanswerCount = 0;
+    var timer = 19;
+    var intervalId;
+    var userGuess = "";
+    var running = false;
+    var qCount = options.length;
+    var pick;
+    var index;
+    var newArray = [];
+    var holder = [];
+
+    $("#reset").hide();
+    //click mission start to begin
+    $("#start").on("click", function () {
+        $("#timeleft").html("<h2>" + "Time remaining: 20 Seconds" + "</h2>");
+        $("#start").hide();
+        $("#instruc").hide();
+        runTimer();
+        displayQuestion();
+        for (var i = 0; i < options.length; i++) {
+            holder.push(options[i]);
+        }
+    })
+    //timer start
+    function runTimer() {
+        $("#reset").hide();
+        if (!running) {
+            intervalId = setInterval(decrement, 1000);
+            running = true;
+        }
     }
-];
+    //timer countdown
+    function decrement() {
+        $("#timeleft").html("<h2>" + "Time remaining: " + timer + " Seconds" + "</h2>");
+        timer--;
 
-var pageQues = pages[Math.floor(Math.random() * pages.Length)];
+        //stop timer if it reaches 0
+        if (timer === -1) {
+            $("#timeleft").html("<h2>" + "MISSION END:" + "</h2>");
+            unanswerCount++;
+            stop();
+            $("#questionblock").empty();
+            $("#answerblock").empty();
+            $("#questionblock").html("<h2>CARNAGE REPORT: </h2>");
+            $("#answerblock").append("<h2> Kills: " + correctCount + "</h2>");
+            $("#answerblock").append("<h2> Deaths: " + wrongCount + "</h2>");
+            $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
+            $("#answerblock").append("<h2> Unanswered: " + unanswerCount + "</h2>");
+            $("#reset").show();
+            /*correctCount = 0;
+            wrongCount = 0;
+            killdeathRatio = 0;
+            unanswerCount = 0;*/
 
-
-
-var number = 30; //  Set our number counter to 100.
-
-var intervalId; //  Variable that will hold our interval ID when we execute the "run" function
-
-$("#resume").on("click", run); //  When the resume button gets clicked, execute the run function.
-$("#startOver").on("click", reset); // write a reset function
-
-function reset() {
-    $("startOver").attr("id", "resume");
-    $("#resume").text("Resume");
-    number = 30;
-    intervalId;
-};
-
-//  The run function sets an interval that runs the decrement function once a second.
-function run() {
-    $("#resume").attr('id', 'startOver');
-    $("startOver").text("Start Over");
-    clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
-}
-
-//  The decrement function.
-function decrement() {
-
-    //  Decrease number by one.
-    number--;
-
-    //  Show the number in the #show-number tag.
-    $("#showNumber").html("<h2>" + "Time Left: " + number + " Seconds" + "</h2>");
-
-    //  Once number hits zero...
-    if (number == -1) {
-        //  ...run the stop function.
-        reset();
-        //  Alert the user that time is up.
-        alert("Time Up! How did you do?");
+        }
     }
-}
+
+    //stop timer
+    function stop() {
+        running = false;
+        clearInterval(intervalId);
+    }
+    //randomly pick question in array if not already shown then display question and loop though and display possible answers
+    function displayQuestion() {
+        //generate random index within the array
+        index = Math.floor(Math.random() * options.length);
+        pick = options[index];
+
+        $("#questionblock").html("<h2>" + pick.question + "</h2>");
+        for (var i = 0; i < pick.choice.length; i++) {
+            var userChoice = $("<button>");
+            userChoice.addClass("answerchoice");
+            userChoice.html(pick.choice[i]);
+
+            //assign array position to the check answer
+            userChoice.attr("data-guessvalue", i);
+            $("#answerblock").append(userChoice);
+
+        }
+
+        //click function to select answer
+        $(".answerchoice").on("click", function () {
+            //get array position from userGuess
+            userGuess = parseInt($(this).attr("data-guessvalue"));
+
+            //correct guess or wrong guess outcomes
+            if (userGuess === pick.answer) {
+                stop();
+                correctCount++;
+                userGuess = "";
+                $("#answerblock").html("<p>Correct!</p>");
+                hidepicture();
+            } else {
+                stop();
+                wrongCount++;
+                userGuess = "";
+                $("#answerblock").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
+                hidepicture();
+            }
+        })
+    }
+
+    function hidepicture() {
+        $("#answerblock").append("<img src=" + pick.photo + ">");
+        newArray.push(pick);
+        options.splice(index, 1);
+
+        var hidpic = setTimeout(function () {
+            $("#answerblock").empty();
+            timer = 20
+
+            //run the score screen if all questions answered
+            if ((wrongCount + correctCount + unanswerCount) === qCount) {
+                $("#questionblock").empty();
+                $("#questionblock").html("<h2>Carnage Report: </h2>");
+                $("#answerblock").append("<h2> Correct: " + correctCount + "</h2>");
+                $("#answerblock").append("<h2> Incorrect: " + wrongCount + "</h2>");
+                $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
+                $("#answerblock").append("<h2> Unanswered: " + unanswerCount + "</h2>");
+                $("#reset").show();
+                /*correctCount = 0;
+                wrongCount = 0;
+                killdeathRatio = 0;
+                unanswerCount = 0;*/
+
+            } else {
+                runTimer();
+                displayQuestion();
+            }
+        }, 1500);
+    }
+
+    $("#reset").on("click", function () {
+        $("#reset").hide();
+        timer=20;
+        $("#answerblock").empty();
+        $("#questionblock").empty();
+        for (var i = 0; i < holder.length; i++) {
+            options.push(holder[i]);
+        }
+        // hidepicture();
+        runTimer();
+        displayQuestion();
+
+    })
+
+})
