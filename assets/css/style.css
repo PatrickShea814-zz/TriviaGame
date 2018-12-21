@@ -86,3 +86,13 @@ h2, h4 {
 .btn:hover {
     background-color: rgba(0, 0, 255, 0.6);
 }
+
+.answerchoice {
+    background-color: rgba(0, 0, 255, 0.4);
+    color: white;
+}
+
+.answerchoice:hover {
+    background-color: rgba(0, 0, 255, 0.6);
+    color: white;
+}

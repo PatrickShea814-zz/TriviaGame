@@ -193,7 +193,7 @@ $(document).ready(function () {
                 runTimer();
                 displayQuestion();
             }
-        }, 2000);
+        }, 3000);
     }
 
     $("#reset").on("click", function () {
