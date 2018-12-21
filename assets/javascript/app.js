@@ -4,7 +4,7 @@ $(document).mouseover(function () {
     document.getElementById("my_audio").play();
 });
 $(document).ready(function () {
-
+    $("#my_audio").hide();
     var options = [
         {
             question: "What ship does the first mission take place on?",
@@ -107,10 +107,7 @@ $(document).ready(function () {
             $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
             $("#answerblock").append("<h2> Unanswered: " + unanswerCount + "</h2>");
             $("#reset").show();
-            /*correctCount = 0;
-            wrongCount = 0;
-            killdeathRatio = 0;
-            unanswerCount = 0;*/
+
 
         }
     }
@@ -167,7 +164,7 @@ $(document).ready(function () {
 
         var hidpic = setTimeout(function () {
             $("#answerblock").empty();
-            timer = 20
+            timer = timer;
 
             //run the score screen if all questions answered
             if ((wrongCount + correctCount + unanswerCount) === qCount) {
@@ -178,10 +175,7 @@ $(document).ready(function () {
                 $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
                 $("#answerblock").append("<h2> Unanswered: " + unanswerCount + "</h2>");
                 $("#reset").show();
-                /*correctCount = 0;
-                wrongCount = 0;
-                killdeathRatio = 0;
-                unanswerCount = 0;*/
+
 
             } else {
                 runTimer();

@@ -1,9 +1,7 @@
 @font-face {
     font-family: 'Halo';
-    src: url('../images/Halo.ttf')  format('truetype'), /* Safari, Android, iOS */
-  }
-
-
+    src: url('../images/Halo.ttf') format('truetype'), /* Safari, Android, iOS */
+}
 
 .answerchoice {
     border: 1px solid black;
@@ -41,7 +39,7 @@ img {
 }
 
 body {
-    background-image: url("../images/19266.jpg");
+    background-image: url("../images/halohud.jpg");
     background-size: cover;
     font-family: 'Halo', sans-serif;
     font-size: 45px;
@@ -71,10 +69,12 @@ h2, h4 {
     margin: 10px auto;
     background-color: rgba(255, 255, 255, 0.7);
     border: 2px solid #403fd3;
-    height: 500px;
+    height: auto;
     width: 60%;
     text-align: center;
     border-radius: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .btn {
