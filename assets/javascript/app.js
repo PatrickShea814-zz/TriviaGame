@@ -68,7 +68,6 @@ $(document).ready(function () {
 
     var correctCount = 0;
     var wrongCount = 0;
-    var killdeathRatio = correctCount / wrongCount;
     var unanswerCount = 0;
     var timer = 29;
     var intervalId;
@@ -118,7 +117,6 @@ $(document).ready(function () {
                 $("#questionblock").html("<h2>CARNAGE REPORT: </h2>");
                 $("#answerblock").append("<h2> Kills: " + correctCount + "</h2>");
                 $("#answerblock").append("<h2> Deaths: " + wrongCount + "</h2>");
-                $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
                 $("#success").show();
                 $("#reset").show();
             } else {
@@ -130,7 +128,6 @@ $(document).ready(function () {
                 $("#questionblock").html("<h2>CARNAGE REPORT: </h2>");
                 $("#answerblock").append("<h2> Kills: " + correctCount + "</h2>");
                 $("#answerblock").append("<h2> Deaths: " + wrongCount + "</h2>");
-                $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
                 $("#failed").show();
                 $("#reset").show();
             }
@@ -204,7 +201,6 @@ $(document).ready(function () {
                     $("#questionblock").html("<h2>CARNAGE REPORT: </h2>");
                     $("#answerblock").append("<h2> Kills: " + correctCount + "</h2>");
                     $("#answerblock").append("<h2> Deaths: " + wrongCount + "</h2>");
-                    $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
                     $("#success").show();
                     $("#reset").show();
                 } else {
@@ -216,7 +212,6 @@ $(document).ready(function () {
                     $("#questionblock").html("<h2>CARNAGE REPORT: </h2>");
                     $("#answerblock").append("<h2> Kills: " + correctCount + "</h2>");
                     $("#answerblock").append("<h2> Deaths: " + wrongCount + "</h2>");
-                    $("#answerblock").append("<h2> K/D Ratio: " + killdeathRatio + "</h2>");
                     $("#failed").show();
                     $("#reset").show();
                 }
@@ -232,6 +227,9 @@ $(document).ready(function () {
         $("#failed").hide();
         $("#reset").hide();
         timer = 29;
+        correctCount = 0;
+        wrongCount = 0;
+        unanswerCount = 0;
         $("#answerblock").empty();
         $("#questionblock").empty();
         for (var i = 0; i < holder.length; i++) {
@@ -239,7 +237,7 @@ $(document).ready(function () {
         }
         runTimer();
         displayQuestion();
-
     })
+});
 
-})
+
