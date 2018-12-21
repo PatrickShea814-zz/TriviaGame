@@ -9,7 +9,7 @@ $(document).ready(function () {
         {
             question: "What ship does the first mission take place on?",
             choice: ["Dawn Under Heaven", "Forward Unto Dawn", "The Pillar of Autumn", "Spirit of Fire"],
-            answer: 1,
+            answer: 2,
             photo: "assets/images/pillar.jpg"
         },
         {
@@ -52,14 +52,24 @@ $(document).ready(function () {
             question: "What do the Covenant seek?",
             choice: ["The Great Journey", "Halo", "The Fringe", "The Ark"],
             answer: 0,
-            photo: "assets/images/pillar.jpg"
+            photo: "assets/images/prophets.jpg"
+        }, {
+            question: "Who created Cortana?",
+            choice: ["Dr. Halsey", "Dr. Keyes", "Dr. Palmer", "The Didact"],
+            answer: 0,
+            photo: "assets/images/halsey.jpg"
+        }, {
+            question: "What is The Silent Cartographer?",
+            choice: ["Map Security", "An Island", "A Map Room", "The Control Room"],
+            answer: 2,
+            photo: "assets/images/silentcart.jpg"
         }];
 
     var correctCount = 0;
     var wrongCount = 0;
     var killdeathRatio = correctCount / wrongCount;
     var unanswerCount = 0;
-    var timer = 19;
+    var timer = 59;
     var intervalId;
     var userGuess = "";
     var running = false;
@@ -72,7 +82,7 @@ $(document).ready(function () {
     $("#reset").hide();
     //click mission start to begin
     $("#start").on("click", function () {
-        $("#timeleft").html("<h2>" + "Time remaining: 20 Seconds" + "</h2>");
+        $("#timeleft").html("<h2>" + "Time remaining: 60 Seconds" + "</h2>");
         $("#start").hide();
         $("#instruc").hide();
         runTimer();
@@ -143,12 +153,14 @@ $(document).ready(function () {
             //correct guess or wrong guess outcomes
             if (userGuess === pick.answer) {
                 stop();
+                timer = timer + 3;
                 correctCount++;
                 userGuess = "";
                 $("#answerblock").html("<p>Correct!</p>");
                 hidepicture();
             } else {
                 stop();
+                timer = timer - 3;
                 wrongCount++;
                 userGuess = "";
                 $("#answerblock").html("<p>Wrong! The correct answer is: " + pick.choice[pick.answer] + "</p>");
@@ -181,12 +193,12 @@ $(document).ready(function () {
                 runTimer();
                 displayQuestion();
             }
-        }, 1500);
+        }, 2000);
     }
 
     $("#reset").on("click", function () {
         $("#reset").hide();
-        timer=20;
+        timer = 20;
         $("#answerblock").empty();
         $("#questionblock").empty();
         for (var i = 0; i < holder.length; i++) {
