@@ -1,6 +1,10 @@
+
 @font-face {
-    font-family: 'Halo';
-    src: url('../images/Halo.ttf') format('truetype'), /* Safari, Android, iOS */
+    font-family: 'haloregular';
+    src: url('halo3.regular-webfont.woff2') format('woff2'),
+         url('halo3.regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .answerchoice {
@@ -41,7 +45,7 @@ img {
 body {
     background-image: url("../images/halohud.jpg");
     background-size: cover;
-    font-family: 'Halo', sans-serif;
+    font-family: 'haloregular', 'Orbitron', sans-serif;
     font-size: 45px;
 }
 
